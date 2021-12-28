@@ -29,7 +29,7 @@ def processData(dataRecvd):
         print("MOVEMENT")
         # Movement data
         # Send serial movement data to arduino
-        #dataToSend = splitData[1].encode('utf-8')
+        #dataToSend = ('<'+splitData[1]+'>').encode('utf-8')
         #ser.write(dataToSend)
 
     if (splitData[0] == 's'):
