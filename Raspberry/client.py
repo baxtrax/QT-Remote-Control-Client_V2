@@ -7,12 +7,12 @@ import errno
 import select
 from socket import error as socket_error
 
-#print("======================================")
-#print("Setting up Serial between Raspberry Pi and Leonardo.")
-#ser = serial.Serial(constants.SERIAL_PORT, constants.SERIAL_BUADRATE)
-#print("Serial port information: ")
-#print("    Port: " + str(constants.SERIAL_PORT))
-#print("    Buadrate: " + str(constants.SERIAL_BUADRATE))
+print("======================================")
+print("Setting up Serial between Raspberry Pi and Leonardo.")
+ser = serial.Serial(constants.SERIAL_PORT, constants.SERIAL_BUADRATE)
+print("Serial port information: ")
+print("    Port: " + str(constants.SERIAL_PORT))
+print("    Buadrate: " + str(constants.SERIAL_BUADRATE))
 
 serverAddressPort = (constants.SERVER_UDP_IP, constants.SERVER_UDP_PORT)
 # Create a UDP socket at client side
@@ -29,8 +29,8 @@ def processData(dataRecvd):
         print("MOVEMENT")
         # Movement data
         # Send serial movement data to arduino
-        #dataToSend = ('<'+splitData[1]+'>').encode('utf-8')
-        #ser.write(dataToSend)
+        dataToSend = ('<'+splitData[1]+'>').encode('utf-8')
+        ser.write(dataToSend)
 
     if (splitData[0] == 's'):
         print("STATUS")
