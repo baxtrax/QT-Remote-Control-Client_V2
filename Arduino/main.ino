@@ -22,10 +22,10 @@ const char endMarker = '>';
 char receivedChars[numChars];
 char tempChars[numChars];
 
-int FLSpeed = 0;
-int FRSpeed = 0;
-int BLSpeed = 0;
-int BRSpeed = 0;
+float FLSpeed = 0;
+float FRSpeed = 0;
+float BLSpeed = 0;
+float BRSpeed = 0;
 
 boolean newData = false;
 
@@ -105,16 +105,16 @@ void parseData() {      // split the data into its parts
 
   strtokIndx = strtok(tempChars,",");
   
-  FRSpeed = atoi(strtokIndx);
+  FRSpeed = atof(strtokIndx);
  
   strtokIndx = strtok(NULL, ",");
-  BLSpeed = atoi(strtokIndx);
+  BLSpeed = atof(strtokIndx);
 
   strtokIndx = strtok(NULL, ",");
-  FLSpeed = atoi(strtokIndx);
+  FLSpeed = atof(strtokIndx);
   
   strtokIndx = strtok(NULL, ",");
-  BRSpeed = atoi(strtokIndx); 
+  BRSpeed = atof(strtokIndx); 
 
 }
 
@@ -122,11 +122,11 @@ void sendSpeedsToMotors() {
   //Serial.println(String(FRSpeed) + " " + String(BLSpeed) + " " + String(FLSpeed) + " " + String(BRSpeed));
   
   if(FRSpeed > 0) {             //FORWARD
-    analogWrite(FR_ENA, abs(FRSpeed*255));
+    analogWrite(FR_ENA, (int)(abs(FRSpeed)*255.999));
     digitalWrite(FR_pin1, LOW);
     digitalWrite(FR_pin2, HIGH);
   } else if (FRSpeed < 0) {     //REVERSE
-    analogWrite(FR_ENA, abs(FRSpeed*255));
+    analogWrite(FR_ENA, (int)(abs(FRSpeed)*255.999));
     digitalWrite(FR_pin1, HIGH);
     digitalWrite(FR_pin2, LOW);
   } else {                      //STOP
@@ -136,11 +136,11 @@ void sendSpeedsToMotors() {
   }
 
   if(BLSpeed > 0) {             //FORWARD
-    analogWrite(BL_ENA, abs(BLSpeed*255));
+    analogWrite(BL_ENA, (int)(abs(BLSpeed)*255.999));
     digitalWrite(BL_pin1, HIGH);
     digitalWrite(BL_pin2, LOW);
   } else if (BLSpeed < 0) {     //REVERSE
-    analogWrite(BL_ENA, abs(BLSpeed*255));
+    analogWrite(BL_ENA, (int)(abs(BLSpeed)*255.999));
     digitalWrite(BL_pin1, LOW);
     digitalWrite(BL_pin2, HIGH);
   } else {                      //STOP
@@ -150,11 +150,11 @@ void sendSpeedsToMotors() {
   }
 
   if(FLSpeed > 0) {             //FORWARD
-    analogWrite(FL_ENA, abs(FLSpeed*255));
+    analogWrite(FL_ENA, (int)(abs(FLSpeed)*255.999));
     digitalWrite(FL_pin1, LOW);
     digitalWrite(FL_pin2, HIGH);
   } else if (FLSpeed < 0) {     //REVERSE
-    analogWrite(FL_ENA, abs(FLSpeed*255));
+    analogWrite(FL_ENA, (int)(abs(FLSpeed)*255.999));
     digitalWrite(FL_pin1, HIGH);
     digitalWrite(FL_pin2, LOW);
   } else {                      //STOP
@@ -164,11 +164,11 @@ void sendSpeedsToMotors() {
   }
 
   if(BRSpeed > 0) {             //FORWARD
-    analogWrite(BR_ENA, abs(BRSpeed*255));
+    analogWrite(BR_ENA, (int)(abs(BRSpeed)*255.999));
     digitalWrite(BR_pin1, HIGH);
     digitalWrite(BR_pin2, LOW);
   } else if (BRSpeed < 0) {     //REVERSE
-    analogWrite(BR_ENA, abs(BRSpeed*255));
+    analogWrite(BR_ENA, (int)(abs(BRSpeed)*255.999));
     digitalWrite(BR_pin1, LOW);
     digitalWrite(BR_pin2, HIGH);
   } else {                      //STOP
