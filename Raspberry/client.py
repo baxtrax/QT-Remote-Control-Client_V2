@@ -9,7 +9,7 @@ from socket import error as socket_error
 
 print("======================================")
 print("Setting up Serial between Raspberry Pi and Leonardo.")
-ser = serial.Serial(constants.SERIAL_PORT, constants.SERIAL_BUADRATE)
+ser = serial.Serial(port=constants.SERIAL_PORT, baudrate=constants.SERIAL_BUADRATE, writeTimeout=0, timeout=0.01)
 print("Serial port information: ")
 print("    Port: " + str(constants.SERIAL_PORT))
 print("    Buadrate: " + str(constants.SERIAL_BUADRATE))
@@ -17,7 +17,7 @@ print("    Buadrate: " + str(constants.SERIAL_BUADRATE))
 serverAddressPort = (constants.SERVER_UDP_IP, constants.SERVER_UDP_PORT)
 # Create a UDP socket at client side
 clientSock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-clientSock.bind(('', 30020))
+clientSock.bind(('', constants.SERVER_UDP_PORT))
 clientSock.setblocking(0)
 print("======================================")
 print("UDP client setup and ready to communicate")
@@ -66,5 +66,6 @@ while(True):
         else:
             raise e
         time.sleep(1)
-
-    
+    except KeyboardInterrupt:
+        print("Keyboard Exit, Shutting down communication...")
+        clientSock.close()
